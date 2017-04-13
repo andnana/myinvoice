@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ghl.entity.Invoice" 
+		table="invoice">
+		<id name="id" type="integer" 
+			column="ID">
+			<!-- 用来指明主键的生成方式 -->
+			<generator class="native" />
+				
+		</id>
+		
+		
+
+	<property name="deposit" type="java.lang.Double" column="deposit" />
+	<property name="balance" type="java.lang.Double" column="balance" />
+	<property name="note" type="java.lang.String" column="note" />	
+	<property name="paymentmethod" type="java.lang.Integer" column="paymentmethod"/>
+	<property name="chequenumber" type="java.lang.String" column="chequenumber"/>
+	<property name="date" type="java.util.Date" column="date" />		 
+	<many-to-one name="deal" column="dealid" class="com.ghl.entity.Deal" not-null="true" cascade="none" lazy="false" not-found="ignore"> 
+		 
+	</many-to-one>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ligou4.entity.Products" 
+		table="products">
+		<id name="id" type="integer" 
+			column="ID">
+			<!-- 用来指明主键的生成方式 -->
+			<generator class="native" />
+				
+		</id>
+		<property name="productsname" type="java.lang.String" column="productsname" />
+		<property name="description" 
+			type="java.lang.String" column="description" />
+	
+	
+	<property name="addtime" type="java.util.Date" column="addtime" />
+	<property name="active" type="java.lang.Integer" column="active" />
+	<property name="recommended" type="java.lang.Integer" column="recommended" />
+	<property name="imgname" type="java.lang.String" column="imgname" />
+	<property name="money" type="java.lang.Integer" column="money" />
+	<property name="beforemoney" type="java.lang.Integer" column="beforemoney" />	
+	<bag name="productsCommentList" inverse="false" lazy="false" cascade="all" order-by="id desc">
+		<key column="productsid"> </key>
+			<one-to-many class="com.ligou4.entity.ProductsComment"/>
+		</bag>
+			<bag name="imgList" inverse="false" lazy="false" cascade="all" order-by="id desc">
+		<key column="productsid"> </key>
+			<one-to-many class="com.ligou4.admin.entity.Img"/>
+		</bag>
+			<many-to-one name="brandSort" column="brandsortid"  cascade="none" lazy="false" not-found="ignore">
+			</many-to-one>
+			<many-to-one name="secondSort" column="secondsortid"  cascade="none" lazy="false" not-found="ignore">
+			</many-to-one>
+			<many-to-one name="thirdSort" column="thirdsortid"  cascade="none" lazy="false" not-found="ignore">
+			</many-to-one>
+			<many-to-one name="sort" column="sortid"  cascade="none" lazy="false" not-found="ignore">
+			</many-to-one>
+			<set name="sizeset" table="products_size" lazy="false" cascade="all" >
+			<key column="productsid"/>
+			<many-to-many class="com.ligou4.admin.entity.SizeName" column="sizeid"/>
+			</set>
+			<bag name="scoreList" inverse="false" lazy="false" cascade="all" order-by="id desc">
+		<key column="productsid"> </key>
+			<one-to-many class="com.ligou4.entity.Score"/>
+		</bag>	
+	</class>
+	
+</hibernate-mapping>

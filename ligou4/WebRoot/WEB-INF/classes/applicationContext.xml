@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:tx="http://www.springframework.org/schema/tx" 
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:context="http://www.springframework.org/schema/context" 
+		xmlns:jee="http://www.springframework.org/schema/jee"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+			http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-2.5.xsd">
+<!-- 定义c3p0连接池对象 -->
+<bean id="c3p0DS" 
+	class="com.mchange.v2.c3p0.ComboPooledDataSource">
+	<property name="user" value="root">
+	</property>
+	<property name="password" value="123">
+	</property>
+	<property name="driverClass" 
+	  value="com.mysql.jdbc.Driver">
+	</property>
+	<property name="jdbcUrl" 
+	  value="jdbc:mysql://localhost:3306/ligou?characterEncoding=UTF-8">
+	</property>
+	<property name="maxPoolSize" value="5">
+	</property>
+</bean>
+
+<!-- 定义SessionFactory对象 -->
+<bean id="sessionFactory"
+	 class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+	<!-- 指定连接池资源 -->
+	<property name="dataSource" ref="c3p0DS">
+	</property>
+	<!-- 指定hbm.xml资源 -->
+	<property name="mappingResources">
+		<list>
+			<value>com/ligou4/entity/Student.hbm.xml</value>
+			<value>com/ligou4/entity/news.hbm.xml</value>
+			<value>com/ligou4/entity/comment.hbm.xml</value>
+			<value>com/ligou4/entity/user.hbm.xml</value>
+			<value>com/ligou4/admin/entity/pic.hbm.xml</value>
+			<value>com/ligou4/entity/commoninfo.hbm.xml</value>
+			<value>com/ligou4/entity/sort.hbm.xml</value>
+			<value>com/ligou4/entity/products.hbm.xml</value>
+			<value>com/ligou4/admin/entity/sizename.hbm.xml</value>	
+			<value>com/ligou4/admin/entity/img.hbm.xml</value>	
+		
+				<value>com/ligou4/admin/entity/colorsort.hbm.xml</value>
+				<value>com/ligou4/entity/productscomment.hbm.xml</value>
+				<value>com/ligou4/admin/entity/newssort.hbm.xml</value>
+				<value>com/ligou4/entity/brandsort.hbm.xml</value>
+				<value>com/ligou4/entity/costsort.hbm.xml</value>	
+				<value>com/ligou4/entity/secondsort.hbm.xml</value>
+				<value>com/ligou4/entity/thirdsort.hbm.xml</value>		
+					<value>com/ligou4/entity/score.hbm.xml</value>
+						<value>com/ghl/entity/deal.hbm.xml</value>
+					<value>com/ghl/entity/product.hbm.xml</value>	
+					<value>com/ghl/entity/product2.hbm.xml</value>	
+					<value>com/ghl/entity/customer.hbm.xml</value>
+					<value>com/ghl/entity/invoice.hbm.xml</value>	
+					<value>com/ghl/entity/saleperson.hbm.xml</value>	
+		</list>
+	</property>
+	<!-- hibernate参数 -->
+	<property name="hibernateProperties">
+		<props>
+			<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+			<prop key="hibernate.show_sql">true</prop>
+			<prop key="hibernate.format_sql">true</prop>
+		</props>
+	</property>
+</bean>
+
+	<context:component-scan base-package="com">
+	</context:component-scan>
+
+
+</beans>

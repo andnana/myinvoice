@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ligou4.entity.News" 
+		table="news">
+		<id name="id" type="integer" 
+			column="ID">
+			<!-- 用来指明主键的生成方式 -->
+			<generator class="native" />
+				
+		</id>
+		<property name="title" 
+			type="java.lang.String" column="title" />
+		
+		<property name="content" 
+			type="java.lang.String" column="content" />
+			<property name="imgname" 
+			type="java.lang.String" column="imgname" />
+			<property name="addtime" type="java.util.Date" column="addtime" />
+		<property name="sortid" type="java.lang.Integer" column="sortid" />
+			
+			<property name="active" 
+			type="java.lang.Integer" column="active" /> 
+	<property name="commentcount" 
+			type="java.lang.Integer" column="commentcount" />
+	<many-to-one name="user" column="userid" cascade="persist" lazy="false" not-found="ignore"> 
+		
+	</many-to-one>
+	
+		
+	
+<bag name="commentlist" inverse="false" cascade="all" lazy="false" order-by="id desc">
+		<key column="newsid"> </key>
+			<one-to-many class="com.ligou4.entity.Comment"/>
+		</bag>
+	</class>
+</hibernate-mapping>

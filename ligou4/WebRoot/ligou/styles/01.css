@@ -1,0 +1,8 @@
+#reg{
+	background:#e8ffe8;
+	width:700px;
+	border:2px;
+}
+tr td:first-child{
+	text-align:right;
+}

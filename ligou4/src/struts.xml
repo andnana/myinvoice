@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+<constant name="struts.i18n.encoding" value="utf-8"/>
+	<package name="ligou4" 
+		extends="json-default">
+		<interceptors>
+			<interceptor name="interceptorfont" class="com.ligou4.interceptor.FontInterceptor"/>
+			<interceptor name="loginInterceptor" class="com.ligou4.interceptor.LoginInterceptor"/>
+		</interceptors>
+		<default-action-ref name="error"></default-action-ref>
+	<!-- 	<action name="error">
+			<result name="success" type="redirect">
+				/error.jsp
+			</result>
+		</action> -->
+		<action name="findStudent" class="findCostAction">
+			<result name="success">
+				find_cost.jsp
+			</result>
+		</action>
+		<action name="testaction" class="testAction">
+			<result name="success">
+				ghl/deal/aboutus.jsp
+			</result>
+		</action>
+		<action name="addsaleperson" class="addSalePersonAction">
+			<result name="success" type="redirectAction">
+				salepersonlist.action
+			</result>
+		</action>
+			<action name="addcustomer" class="addCustomerAction">
+			
+				<result name="success" type="redirectAction">
+				customerlist.action
+			</result>
+			
+		</action>
+			<action name="addproduct" class="addProductAction">
+			
+				<result name="success" type="redirectAction">
+				productlist.action
+			</result>
+			
+		</action>
+		<action name="adddeal" class="addDealAction">
+			
+				<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			
+		</action>
+			<action name="customerlist" class="customerListAction">
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/customer/customerlist.jsp
+			</result>
+		</action>
+			<action name="salepersonlist" class="salePersonListAction">
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/saleperson/salepersonlist.jsp
+			</result>
+		</action>
+			<action name="productlist" class="productListAction">
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/product/productlist.jsp
+			</result>
+		</action>
+		<action name="deallist" class="dealListAction">
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/deal/deallist.jsp
+			</result>
+		</action>
+			<action name="toaddcustomer">
+			<result name="success">
+				/ghl/customer/addcustomer.jsp
+			</result>
+		</action>
+			<action name="toadddeal" class="toAddDealAction">
+			<result name="success">
+				/ghl/deal/adddeal.jsp
+			</result>
+		</action>
+			<action name="toaddproduct">
+			<result name="success">
+				/ghl/product/addproduct.jsp
+			</result>
+		</action>
+			<action name="toaddsaleperson">
+			<result name="success">
+				/ghl/saleperson/addsaleperson.jsp
+			</result>
+		</action>
+			<action name="findcustomer" class="findCustomerAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">dealList</param>
+			</result>
+		</action>
+			<action name="findsaleperson" class="findSalePersonAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">salePersonList</param>
+			</result>
+		</action>
+		<action name="dealproductlist" class="dealProductListAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">productList</param>
+			</result>
+		</action>
+		<action name="toIndex"  class="toIndexAction">
+		<param name="size">5</param>
+			<result name="success">
+				ligou/index.jsp
+			</result>
+		</action>	
+		<action name="contact"  class="contactAction">
+		<param name="size">3</param>
+			<result name="success">
+				ligou/contact.jsp
+			</result>
+		</action>
+		<action name="news"  class="newsAction">
+		<param name="pageSize">1</param>
+		<param name="size">3</param>
+			<result name="success">
+				ligou/news.jsp
+			</result>
+		</action>
+		<action name="newsdetail" class="newsDetailAction">
+		<param name="pageSize">2</param>
+		<param name="size">3</param>
+			<result name="success">
+				ligou/newsdetail.jsp
+			</result>
+		</action>
+		<action name="savecomment" class="saveCommentAction">
+		<param name="font">(SB|傻逼|NMD|TMD|CNM|TNND)</param>
+		<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="interceptorfont"/>
+		 
+
+			<result name="success"  type="redirect">
+				newsdetail.action?page=${page}&amp;newsid=${newsid}
+			</result>
+			
+		</action>
+		<action name="comment" class="toNewsCommentAction">
+		<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="size">3</param>
+			<result name="success">
+				ligou/newscomment.jsp
+			</result>
+			<result name="login" type="redirectAction">
+				toLogin.action
+			</result>
+		</action>
+		<action name="admincommoninfo" class="toCommonInfoAction">
+			<result name="success">
+				admin/commoninfo.jsp
+			</result>
+		</action>
+		<action name="adminslide" class="toAdminSlideAction">
+			<result name="success">
+				admin/slide.jsp
+			</result>
+		</action>
+		<action name="adminupload" class="uploadSlidePicAction">
+				<param name="path">/pic_slide</param>
+				<param name="smallpicpath">/small_pic_slide</param>
+			<result name="success" type="redirect">
+				adminslide.action
+				</result>
+		</action>
+		<action name="deleteslideimg" class="deleteSlideImg">
+			<param name="path">/pic_slide</param>
+				<param name="smallpicpath">/small_pic_slide</param>
+				<result name="success" type="redirect">
+				adminslide.action
+				</result>
+		</action>
+		<action name="adminnews" class="adminNewsAction">
+		<param name="pageSize">1</param>
+			<result name="success">
+				admin/news.jsp
+			</result>
+		</action>
+		<action name="adminnewsdetail" class="adminNewsDetailAction">
+		<param name="pageSize">5</param>
+			<result name="success">
+				admin/newsdetail.jsp
+			</result>
+		</action>
+			<action name="savecommoninfo" class="saveCommonInfoAction">
+		
+			<result name="success">
+				admin/commoninfo.jsp
+			</result>
+		</action>
+		<action name="deletenews" class="deleteNewsAction">
+		<param name="path">/pic_news</param>
+				<param name="smallpicpath">/small_pic_news</param>
+		<param name="pageSize">1</param>
+			<result name="success">
+				admin/news.jsp
+			</result>
+		</action>
+		<action name="toaddnews" class="toAddNewsAction">
+			<param name="size">3</param>
+			<result name="success">
+				ligou/addnews.jsp
+			</result>
+		</action>
+				<action name="savenews" class="saveNewsAction">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="loginInterceptor"/>
+				<param name="path">/pic_news</param>
+				<param name="smallpicpath">/small_pic_news</param>
+			<result name="success" type="redirect">
+				news.action
+			</result>
+			<result name="login" type="redirectAction">
+			
+				toLogin.action
+			</result>
+		</action>
+				<action name="fproductslist" class="productsListAction">
+				<param name="pageSize">8</param>
+				<param name="size">8</param>
+			<result name="success">
+				ligou/productslist.jsp
+			</result>
+		</action>
+				<action name="fproductsListSort" class="productsListSortAction">
+				<param name="pageSize">8</param>
+				<param name="size">8</param>
+			<result name="success">
+				ligou/productslist.jsp
+			</result>
+		</action>
+				<action name="productsdetail" class="productsDetailAction">
+				
+			<param name="size">3</param>
+			<result name="success">
+				ligou/productsdetail.jsp
+			</result>
+		</action>
+		
+		<action name="tobcommoninfo">
+			<result name="success">
+				admin/commoninfo.jsp
+			</result>
+		</action>
+			<action name="commoninfolist" class="commonInfoListAction">
+				
+			
+			<result name="success">
+			admin/commoninfolist.jsp
+			</result>
+		</action>
+		<action name="commoninfoupdate" class="commonInfoUpdateAction">
+				
+			
+			<result name="success">
+			admin/commoninfoupdate.jsp
+			</result>
+		</action>
+		<action name="tocommoninfoupdate" class="toCommonInfoUpdateAction">
+				
+			
+			<result name="success">
+			admin/commoninfoupdate.jsp
+			</result>
+		</action>
+		<action name="commoninfodelete" class="commonInfoDeleteAction">
+				
+			
+			<result name="success" type="redirect">
+			commoninfolist.action
+			</result>
+		</action>
+			<action name="toaddproducts" class="toAddProductsAction">
+				
+			
+			<result name="success">
+			admin/addproducts.jsp
+			</result>
+		</action>
+			<action name="saveproducts" class="saveProductsAction">
+				
+			<param name="path">/pic_products</param>
+			<param name="small_pic_path">/small_pic_products</param>
+			<result name="success" type="redirect">
+			toaddproducts.action
+			</result>
+		</action>
+			<action name="bproductslist" class="adminProductsListAction">
+				
+			<param name="pageSize">8</param>
+			<result name="success">
+			admin/productslist.jsp
+			</result>
+		</action>
+		
+		<action name="productsuploadimg" class="productsUploadImgAction">
+				
+			<param name="path">/admin/img</param>
+			<result name="success" type="redirect">
+			toproductsimg.action?id=${id}
+			</result>
+		</action>
+		<action name="productsdelete"  class="productsDeleteAction">
+			<param name="path">/admin/img</param>
+			<param name="pic_products">/pic_products</param>
+			<param name="suffixAll">jpg,png,gif,bmp</param>
+			<result name="success" type="redirectAction">
+			<param name="actionName">
+				bproductslist.action
+			</param>
+				
+			</result>
+		</action>
+		<action name="toproductsimg" class="toProductsImgAction">
+				
+			
+			<result name="success">
+			admin/productsimg.jsp
+			</result>
+		</action>
+			<action name="getimglist" class="getImgListAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">imgList</param>
+			</result>
+		</action>
+			<action name="submittext" class="submitTextAction">
+				<param name="font">(SB|傻逼|NMD|TMD|CNM|TNND)</param>
+				<interceptor-ref name="defaultStack"/>
+	
+				<interceptor-ref name="loginInterceptor"/>	
+				<result name="success" type="redirectAction">
+					productsdetail?productsid=${productsid}
+				</result>
+				<result name="login" type="redirectAction">
+				toLogin.action
+				</result>
+		</action>
+		<action name="testusername" class="testUsernameAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">msgflag</param>
+			</result>
+		</action>
+		<action name="toregister" class="toRegisterAction" >
+			<result>
+				ligou/register.jsp
+			</result>
+		</action>
+		<action name="createImage"
+			class="createImageAction">
+			<result name="success" type="stream">
+				<param name="inputName">
+					imageStream
+				</param>
+			</result>
+			<result name="error">
+				/WEB-INF/main/error.jsp
+			</result>
+		</action>
+		<action name="testcode" class="testCodeAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">msgflag</param>
+			</result>
+		</action>
+			<action name="register" class="registerAction">
+				
+				
+				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<param name="path">/pic_head</param>
+				<param name="smallpicpath">/small_pic_head</param>
+				<param name="fileSize">3000</param>
+				<param name="ext">jpg,png,gif,bmp</param>
+			<result name="success" type="redirectAction">
+				toLogin.action
+				</result>
+			<result name="input">
+				ligou/register.jsp?label=4
+			</result>
+		</action>
+		<action name="toLogin" class="toLoginAction">
+			<result name="success">
+				ligou/login.jsp
+			</result>
+		</action>
+		<action name="login" class="loginAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<action name="logout" class="logoutAction">
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+		</action>
+		<action name="productsImgList" class="productsImgListAction">
+			<result name="success">
+			admin/productsImgList.jsp
+			</result>
+		</action>
+		<action name="deleteProductsImg" class="deleteProductsImgAction">
+			<param name="path">/admin/img</param>
+			<result name="success" type="redirectAction">
+				productsImgList?productsid=${productsid}
+			</result>
+		</action>
+		<action name="secondSortList" class="secondSortListAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">secondSortList</param>
+			</result>
+		</action>
+		
+		<action name="thirdSortList" class="thirdSortListAction">
+				
+			
+			<result name="success" type="json">
+			<param name="root">thirdSortList</param>
+			</result>
+		</action>
+		<action name="saveScore" class="saveProductsScoreAction">
+		
+			<result name="success" type="json">
+				<param name="root">data</param>
+			</result>
+			
+		</action>
+	</package>
+</struts> 
