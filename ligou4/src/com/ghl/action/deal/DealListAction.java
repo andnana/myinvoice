@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.ghl.action.BaseAction;
 import com.ghl.dao.DealDao;
+import com.ghl.entity.Deal;
 @Controller
 @Scope("prototype")
 public class DealListAction extends BaseAction{
@@ -18,11 +19,86 @@ public class DealListAction extends BaseAction{
 		@Resource
 		@Qualifier("dealImpl")
 		private DealDao dealDao;
+		private Integer pageSize = 5; 
+		private List<Deal> dealList = new ArrayList<Deal>();
+		private Integer page = 1; 
+		private Integer totalPage;
+		private Integer totalItem;
+		
 	
-	
 		
 		
 		
+		public List<Deal> getDealList() {
+			return dealList;
+		}
+
+
+
+
+		public void setDealList(List<Deal> dealList) {
+			this.dealList = dealList;
+		}
+
+
+
+
+		public Integer getPageSize() {
+			return pageSize;
+		}
+
+
+
+
+		public void setPageSize(Integer pageSize) {
+			this.pageSize = pageSize;
+		}
+
+
+
+
+		public Integer getPage() {
+			return page;
+		}
+
+
+
+
+		public void setPage(Integer page) {
+			this.page = page;
+		}
+
+
+
+
+		public Integer getTotalPage() {
+			return totalPage;
+		}
+
+
+
+
+		public void setTotalPage(Integer totalPage) {
+			this.totalPage = totalPage;
+		}
+
+
+
+
+		public Integer getTotalItem() {
+			return totalItem;
+		}
+
+
+
+
+		public void setTotalItem(Integer totalItem) {
+			this.totalItem = totalItem;
+		}
+
+
+
+
 		public DealDao getDealDao() {
 			return dealDao;
 		}
@@ -38,7 +114,9 @@ public class DealListAction extends BaseAction{
 
 
 		public String execute(){
-//			productList = dealDao.getProductList();
+			dealList =	dealDao.getDealList(page, pageSize);
+			totalPage = dealDao.getDealTotalPage(pageSize);
+			totalItem = dealDao.getTotalDealItem();
 			return "success";
 		}
 		

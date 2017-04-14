@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <div class="span9">
         <div class="row-fluid">
 			<div class="page-header">
-				<h1>添加订单信息<small></small></h1>
+				<h1>添加订单<small></small></h1>
 			</div>
 			
 			
@@ -91,14 +91,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					
 					<table  class="gridtable" id="addproduct2table">
-		<tr><th>产品</th><th>长</th><th>宽</th><th>厚</th><th>数量</th></tr>
+		<tr><th>产品</th><th>单价</th><th>长</th><th>宽</th><th>厚</th><th>数量</th></tr>
 		
 		<tr><td>
 			
 					
 					
-							<select id="productid" style="margin:0px;padding:0px;color:red" name="product2List[0].productid">
-								
+							<select id="product2select0"  onchange="getPrice(0)" style="margin:0px;padding:0px;color:red" name="product2List[0].productid">
+								<option value="0">---请选择---</option>
 							
 								<s:iterator var="product" value="productList">
 								<option value="<s:property value="id"/>"><s:property value="productname"/></option>
@@ -115,11 +115,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		</td>
-		
-		<td><input type="text" name="product2List[0].product2long"/></td>
-		<td><input type="text" name="product2List[0].product2width"/></td>
-		<td><input type="text" name="product2List[0].product2thick"/></td>
-		<td><input type="text" name="product2List[0].quantity"/></td>
+		<td><input type="text" name="product2List[0].price" id="price0" readonly="readonly"/></td>
+		<td><input type="text" name="product2List[0].product2long" id="long0" onblur="longblur(this.id)"/></td>
+		<td><input type="text" name="product2List[0].product2width" id="width0" onblur="widthblur(this.id)"/></td>
+		<td><input type="text" name="product2List[0].product2thick" id="thick0" onblur="thickblur(this.id)"/></td>
+		<td><input type="text" name="product2List[0].quantity" readonly="readonly"/></td>
 		</tr>
 		  
 		</table>

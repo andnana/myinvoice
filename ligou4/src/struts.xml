@@ -118,6 +118,11 @@
 			<param name="root">productList</param>
 			</result>
 		</action>
+		<action name="findproductbyid" class="findProductByIdAction">
+			<result name="success" type="json">
+			<param name="root">product</param>
+			</result>
+		</action>
 		<action name="toIndex"  class="toIndexAction">
 		<param name="size">5</param>
 			<result name="success">

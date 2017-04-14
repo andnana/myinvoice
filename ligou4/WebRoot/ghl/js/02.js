@@ -245,11 +245,11 @@ $("#findsaleperson").click(function(){
    					
 					
 					
-					'<select id="brandid" style="margin:0px;padding:0px;color:red" name="product2List[' + $addproduct2Index + '].productid">';
-						
+					'<select id="product2select'+$addproduct2Index+'"   onchange="getPrice('+$addproduct2Index+')"  style="margin:0px;padding:0px;color:red" name="product2List[' + $addproduct2Index + '].productid">';
+   					html += '<option value="' + 0 + '"> ---请选择---</option>';
 					$.each( data , function(productIndex, product){
 						
-						html += '<option value="' + (productIndex+1) + '">' + product['productname'] + '</option>';
+						html += '<option value="' + product['id'] + '">' + product['productname'] + '</option>';
    					} );
 						
 				
@@ -258,10 +258,11 @@ $("#findsaleperson").click(function(){
 						
 					html += '</select>'+
 								'</td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2long"/></td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2width"/></td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2thick"/></td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].quantity"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].price" id="price' + $addproduct2Index + '" readonly="readonly"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2long" id="long' + $addproduct2Index + '" onblur="longblur(this.id)"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2width" id="width' + $addproduct2Index + '" onblur="widthblur(this.id)"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2thick" id="thick' + $addproduct2Index + '" onblur="thickblur(this.id)"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].quantity" id="quantity' + $addproduct2Index + '" readonly="readonly"/></td>'+
 								'</tr>';	
 								   						
    					
@@ -279,5 +280,76 @@ $("#findsaleperson").click(function(){
 		
 		
 	});
+	
+	
+//	$("#product2select0").change(function(){
+//		
+//		 alert("product2select0");
+//		});
+//	$("#product2select1").change(function(){
+//		
+//		 alert("product2select1");
+//		});
+
 
 });
+function getPrice(product2selectid){
+	$productid = $("#product2select"+product2selectid).val();
+	
+	 $.ajax({      
+			url: 'findproductbyid.action',    
+			type:"POST",
+			dataType: 'json',
+			data:{productid:$productid},
+			contentType:"application/x-www-form-urlencoded;charset=utf-8",
+			success: function(data) {       
+				console.log(data);
+			
+				$("#product2select"+product2selectid).parent().next().find("input").val(data['price']+"￥");
+			 }    
+			// statusCode: {        
+			//	 404: function() {         
+			//	     alert("没有找到相关文件~~");     
+			//	 }      
+			// }   
+		 }); 
+//		 alert("product2select"+product2selectid);
+	
+}
+function calculateQuantity(longval, widthval, thickval){
+	return longval * widthval * thickval;
+}
+function longblur(longid){
+	$longval = parseInt($("#"+longid).val());
+	$widthval = parseInt($("#"+longid).parent().next().find("input").val());
+	$thickval = parseInt($("#"+longid).parent().next().next().find("input").val());
+	
+		if($longval>0 && $widthval>0 && $thickval>0){
+		
+			$quantity = calculateQuantity($longval, $widthval, $thickval)
+			$("#"+longid).parent().next().next().next().find("input").val($quantity);
+		}
+	
+}
+function widthblur(widthid){
+	$longval = parseInt($("#"+widthid).parent().prev().find("input").val());
+	$widthval = parseInt($("#"+widthid).val());
+	$thickval = parseInt($("#"+widthid).parent().next().find("input").val());
+
+	if($longval>0 && $widthval>0 && $thickval>0){
+		
+		$quantity = calculateQuantity($longval, $widthval, $thickval)
+		$("#"+widthid).parent().next().next().find("input").val($quantity);
+	}
+}
+function thickblur(thickid){
+	$longval = parseInt($("#"+thickid).parent().prev().prev().find("input").val());
+	$widthval = parseInt($("#"+thickid).parent().prev().find("input").val());
+	$thickval = parseInt($("#"+thickid).val());
+	
+	if($longval>0 && $widthval>0 && $thickval>0){
+		
+		$quantity = calculateQuantity($longval, $widthval, $thickval)
+		$("#"+thickid).parent().next().find("input").val($quantity);
+	}
+}

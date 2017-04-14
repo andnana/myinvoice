@@ -145,6 +145,7 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 		Deal deal = new Deal();
 		Customer customer2 = (Customer)session.get(Customer.class, customer.getId());
 		deal.setCustomer(customer2);
+		deal.setDate(new Date());
 		for(int i=0; i < product2List.size(); i++){
 			Product2 product2 = product2List.get(i);
 			Product product = (Product)session.get(Product.class, product2.getProductid());
@@ -160,5 +161,47 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 		session.flush();
 		session.close();
 		
+	}
+
+	public Product findProductById(Integer productid) {
+		
+		Session session = super.getSession();
+		Product product = (Product)session.get(Product.class, productid);
+		session.close();
+		return product;
+	}
+
+	public List<Deal> getDealList(Integer page, Integer pageSize) {
+		Session session = super.getSession();
+		String hql = "from Deal d order by d.id desc";
+		Query query = 
+			session.createQuery(hql);
+		query.setFirstResult((page-1)*pageSize).setMaxResults(pageSize);
+		System.out.println("######pageSize"+pageSize+"page#####"+page);
+		List<Deal> list = query.list();
+		session.close();
+	return list;
+	}
+	public int getTotalDealItem(){
+		String hql ="select count(*) from Deal";
+		List list = super.getHibernateTemplate()
+					.find(hql);
+	
+		int rows = new Integer(
+				list.get(0).toString());
+		return rows;
+	}
+	public int getDealTotalPage(int pageSize) {
+		String hql ="select count(*) from Deal";
+		List list = super.getHibernateTemplate()
+					.find(hql);
+		int rows = new Integer(
+				list.get(0).toString());
+		
+		if(rows % pageSize == 0){
+			return rows/pageSize;
+		}else{
+			return rows/pageSize+1;	
+		}
 	}
 }

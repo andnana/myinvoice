@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.45)
-# Date: 2016-10-01 09:18:58
+# Date: 2017-04-14 13:47:30
 # Generator: MySQL-Front 5.3  (Build 4.214)
 
 /*!40101 SET NAMES utf8 */;
@@ -164,6 +164,53 @@ INSERT INTO `costsort` VALUES (1,50,99),(2,100,499),(3,500,799),(4,800,999),(5,1
 /*!40000 ALTER TABLE `costsort` ENABLE KEYS */;
 
 #
+# Structure for table "customer"
+#
+
+DROP TABLE IF EXISTS `customer`;
+CREATE TABLE `customer` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `customername` varchar(255) DEFAULT '',
+  `contact` varchar(255) DEFAULT '',
+  `address` varchar(255) DEFAULT '',
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "customer"
+#
+
+INSERT INTO `customer` VALUES (1,'小王','15534212123','大连','2017-04-11 11:33:42'),(2,'小李','15534212123','大连','2017-04-11 12:33:42'),(3,'小于','15534212123','大连','2017-04-11 13:33:42'),(4,'小赵','15534212123','大连','2017-04-11 14:33:42'),(5,'小孙','15534212123','大连','2017-04-11 15:33:42'),(9,'fwef34534','wefwe','wefwe','2017-04-11 16:33:42'),(10,'dfgfgersg','23454654','dfgsdfgdf','2017-04-11 10:33:42'),(11,'dfgdfgdsgsdgfd','gdfgdf','fgdsfgsd','2017-04-11 18:34:21'),(12,'cxvxc','cvsdv','dvs','2017-04-11 18:35:59'),(13,'fbgdg','fdgdf','dfgdsf','2017-04-11 18:38:29'),(14,'dsf','esfs','fesfs','2017-04-11 18:38:54'),(15,'ghhhjj','fghjhhj','fgjhgj','2017-04-11 18:47:57'),(16,'kjljkl','jkljkl','jkl;jkjkllkj','2017-04-11 18:48:47'),(17,'aaaa','fdfgfg','bbbdfgdfds','2017-04-11 18:49:58');
+
+#
+# Structure for table "deal"
+#
+
+DROP TABLE IF EXISTS `deal`;
+CREATE TABLE `deal` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `customerid` int(11) NOT NULL DEFAULT '0',
+  `ispaid` int(1) NOT NULL DEFAULT '0',
+  `iscuttail100` int(1) NOT NULL DEFAULT '0',
+  `iscuttail1000` int(1) NOT NULL DEFAULT '0',
+  `discount` double NOT NULL DEFAULT '1',
+  `vat` double DEFAULT '0',
+  `subtotal` double DEFAULT '0',
+  `total` double DEFAULT '0',
+  `note` text,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `salepersonid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "deal"
+#
+
+INSERT INTO `deal` VALUES (1,1,0,0,0,0,0,0,0,NULL,'2017-04-10 18:49:19',0),(2,2,0,0,0,0,0,0,0,NULL,'2017-04-10 18:51:09',0),(3,3,0,0,0,0,0,0,0,NULL,'2017-04-10 18:51:59',0),(4,4,0,0,0,0,0,0,0,NULL,'2017-04-11 08:50:49',0),(5,5,0,0,0,0,0,0,0,NULL,'2017-04-11 08:51:55',0),(6,3,0,0,0,0,0,0,0,NULL,NULL,13),(7,17,0,0,0,0,0,0,0,NULL,NULL,11),(8,15,0,0,0,0,0,0,0,NULL,'2017-04-14 12:03:24',9),(9,15,0,0,0,0,0,0,0,NULL,'2017-04-14 12:12:29',9),(10,14,0,0,0,0,0,0,0,NULL,'2017-04-14 13:40:14',11),(11,17,0,0,0,0,0,0,0,NULL,'2017-04-14 13:43:03',13);
+
+#
 # Structure for table "f_pic"
 #
 
@@ -229,6 +276,29 @@ CREATE TABLE `img` (
 INSERT INTO `img` VALUES (23,NULL,'yellow_1474797237375','.jpg','yellow'),(25,NULL,'white_1474797255230','.jpg','white'),(26,NULL,'white_1474797290603','.jpg','white'),(28,NULL,'blue_1474848581988','.jpg','blue'),(29,NULL,'blue_1474893929047','.jpg','blue'),(30,NULL,'white_1474893942491','.jpg','white'),(31,NULL,'white_1474893959787','.jpg','white'),(35,NULL,'yellow_1474938132717','.jpg','yellow'),(37,NULL,'white_1474938150476','.jpg','white'),(38,NULL,'yellow_1474938171006','.jpg','yellow'),(40,NULL,'yellow_1474938194300','.jpg','yellow'),(41,NULL,'yellow_1474938205370','.jpg','yellow'),(42,NULL,'yellow_1474938219731','.jpg','yellow'),(43,NULL,'blue_1474938229637','.jpg','blue'),(44,NULL,'blue_1474938241333','.jpg','blue'),(45,NULL,'yellow_1475220825298','.jpg','yellow'),(47,NULL,'yellow_1475220849543','.PNG','yellow'),(49,NULL,'yellow_1475220879731','.PNG','yellow'),(51,NULL,'white_1475220899486','.jpg','white'),(52,NULL,'blue_1475220912235','.jpg','blue'),(54,NULL,'yellow_1475220931810','.jpg','yellow'),(55,41,'yellow_1475226963759','.jpg','yellow'),(56,41,'blue_1475226972657','.jpg','blue'),(57,41,'blue_1475226984380','.jpg','blue'),(58,42,'white_1475227000916','.jpg','white'),(59,42,'blue_1475227010619','.jpg','blue'),(60,42,'blue_1475227018627','.jpg','blue'),(61,43,'white_1475227047821','.jpg','white'),(62,43,'yellow_1475227057525','.jpg','yellow');
 
 #
+# Structure for table "invoice"
+#
+
+DROP TABLE IF EXISTS `invoice`;
+CREATE TABLE `invoice` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `deposit` double DEFAULT '0',
+  `balance` double DEFAULT '0',
+  `note` text,
+  `paymentmethod` tinyint(3) NOT NULL DEFAULT '1' COMMENT '1cash2bank3cheque',
+  `chequenumber` char(50) NOT NULL DEFAULT '',
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `dealid` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "invoice"
+#
+
+INSERT INTO `invoice` VALUES (1,2000,3000,'ffgfgdsdgert',1,'141234','2017-04-10 18:51:09',1);
+
+#
 # Structure for table "news"
 #
 
@@ -273,6 +343,49 @@ CREATE TABLE `newssort` (
 /*!40000 ALTER TABLE `newssort` DISABLE KEYS */;
 INSERT INTO `newssort` VALUES (1,'信息技术'),(2,'生活百科'),(3,'吉它知识'),(4,'汽车'),(5,'英语');
 /*!40000 ALTER TABLE `newssort` ENABLE KEYS */;
+
+#
+# Structure for table "product"
+#
+
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE `product` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `productname` varchar(255) DEFAULT '',
+  `introduce` text,
+  `price` double DEFAULT '0',
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "product"
+#
+
+INSERT INTO `product` VALUES (1,'这是产品名称。玻璃。','这里是介绍',0,'2017-04-10 18:51:09'),(2,'这是产品名称。玻璃。','这里是介绍',0,'2017-04-10 18:51:59'),(3,'这是产品名称。玻璃。','这里是介绍',0,'2017-04-11 08:50:49'),(4,'这是产品名称。玻璃。','这里是介绍',0,'2017-04-11 08:51:55'),(6,'fgsdfgdfsg','<p>产品介绍内容fg</p>',0,'2017-04-12 09:25:33'),(7,'fsdghdfg','<p>gfhfghfgh</p>',0,'2017-04-12 09:29:44'),(8,'ghfg','<p>产品介绍内容ghfhfgh</p>',0,'2017-04-12 09:30:20'),(9,'fdgdf','<p>产品介绍内容fdg</p>',0,'2017-04-12 09:32:33'),(10,'dcgdsf','<p>产品介绍内容fds</p>',0,'2017-04-12 09:35:24'),(11,'fgsdfg','<p>产品介绍内容fdsghdfg</p>',0,'2017-04-12 09:35:47'),(12,'sdfsda','<p>产品介绍内容df</p>',0,'2017-04-12 09:36:32'),(13,'fgfdg','<p>产品介绍内容3</p>',0,'2017-04-12 09:38:49'),(14,'gfdgdsf','<p>产品介绍内容fd</p>',0,'2017-04-12 09:40:07'),(15,'dfgdfsg','<p>产品介绍内容vbgsdf</p>',0,'2017-04-12 09:42:07'),(16,'gfdfg','<p>产品介绍内容dfg</p>',23452234,'2017-04-12 09:46:15'),(17,'gfddgre','<p>产品介绍内容fdg</p>',2345344,'2017-04-12 09:46:58'),(18,'sdfsae','fefsefdfsdaf',23,'2017-04-12 09:54:16');
+
+#
+# Structure for table "product2"
+#
+
+DROP TABLE IF EXISTS `product2`;
+CREATE TABLE `product2` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `productid` int(11) NOT NULL DEFAULT '0',
+  `product2long` int(11) DEFAULT '0',
+  `product2width` int(11) DEFAULT '0',
+  `product2thick` int(11) DEFAULT '0',
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `dealid` int(11) NOT NULL DEFAULT '0',
+  `quantity` int(11) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "product2"
+#
+
+INSERT INTO `product2` VALUES (1,1,200,30,3,'2017-04-10 18:51:09',2,0),(2,2,200,30,3,'2017-04-10 18:51:59',3,0),(3,3,200,30,3,'2017-04-11 08:50:49',4,0),(4,4,200,30,3,'2017-04-11 08:51:55',5,0),(5,18,444,244,2,'2017-04-13 18:10:12',6,345),(6,16,233,323,2,'2017-04-14 08:29:17',7,4423),(7,1,244,444,2,'2017-04-14 08:29:17',7,2344),(8,6,532,344,2,'2017-04-14 08:29:17',7,3455),(9,17,34,34,2,'2017-04-14 12:12:29',9,2312),(10,18,2,2,2,'2017-04-14 13:40:14',10,8),(11,16,3,3,3,'2017-04-14 13:40:14',10,27),(12,17,2,2,2,'2017-04-14 13:43:03',11,8),(13,18,3,3,3,'2017-04-14 13:43:03',11,27);
 
 #
 # Structure for table "products"
@@ -323,6 +436,26 @@ CREATE TABLE `productscomment` (
 #
 
 INSERT INTO `productscomment` VALUES (2,'<p>sdfew</p>',2,5,NULL,'2016-09-26 10:40:11'),(4,'<p>fef</p>',4,5,NULL,'2016-09-26 10:40:29'),(6,'<p>sdfe</p>',6,5,NULL,'2016-09-26 10:40:40'),(8,'<p>fe</p>',8,5,NULL,'2016-09-26 10:40:47'),(9,'<p>ertert</p>',1,6,30,'2016-09-27 11:12:01'),(10,'<p>6453t3</p>',2,7,30,'2016-09-30 11:00:07'),(11,'<p>ffsxh</p>',3,5,30,'2016-09-30 12:21:35'),(12,'<p>ry5y</p>',1,5,41,'2016-09-30 17:20:02'),(13,'<p>ererw</p>',2,8,41,'2016-09-30 17:28:07'),(14,'<p>htrterer</p>',3,8,41,'2016-09-30 17:28:16');
+
+#
+# Structure for table "saleperson"
+#
+
+DROP TABLE IF EXISTS `saleperson`;
+CREATE TABLE `saleperson` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `salepersonname` varchar(255) DEFAULT '',
+  `contact` varchar(255) DEFAULT '',
+  `address` varchar(255) DEFAULT '',
+  `date` datetime DEFAULT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "saleperson"
+#
+
+INSERT INTO `saleperson` VALUES (5,'salepersonnamenamename','23235234','saleperson addressaddress','2017-04-11 16:38:24'),(8,'gerghe','5565673','erhreheryer','2017-04-12 08:32:51'),(9,'gerghe','5565673','erhreheryer','2017-04-12 08:34:58'),(10,'hjtgh','hjgh','jkhkgj','2017-04-12 08:36:14'),(11,'fdhfgh','hjghjhjk','kyukytuk','2017-04-12 08:38:10'),(12,'fgjgh','jghk','jhkjhkuy','2017-04-12 08:38:34'),(13,'fdgerg','regerg','ergre','2017-04-12 09:19:18');
 
 #
 # Structure for table "scoretb"
