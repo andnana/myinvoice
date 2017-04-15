@@ -24,11 +24,26 @@ public class DealListAction extends BaseAction{
 		private Integer page = 1; 
 		private Integer totalPage;
 		private Integer totalItem;
+		private Integer totalMoney;
 		
 	
 		
 		
 		
+		public Integer getTotalMoney() {
+			return totalMoney;
+		}
+
+
+
+
+		public void setTotalMoney(Integer totalMoney) {
+			this.totalMoney = totalMoney;
+		}
+
+
+
+
 		public List<Deal> getDealList() {
 			return dealList;
 		}
@@ -117,6 +132,7 @@ public class DealListAction extends BaseAction{
 			dealList =	dealDao.getDealList(page, pageSize);
 			totalPage = dealDao.getDealTotalPage(pageSize);
 			totalItem = dealDao.getTotalDealItem();
+		
 			return "success";
 		}
 		

@@ -240,12 +240,12 @@ $("#findsaleperson").click(function(){
    			
    			
    			
-   					var html = '<tr><td>'+
+   					var html = '<tr id="tr'+$addproduct2Index+'"><td>'+
    					
    					
 					
 					
-					'<select id="product2select'+$addproduct2Index+'"   onchange="getPrice('+$addproduct2Index+')"  style="margin:0px;padding:0px;color:red" name="product2List[' + $addproduct2Index + '].productid">';
+					'<select id="product2select'+$addproduct2Index+'"   onchange="selectChangeEvent('+$addproduct2Index+')"  style="margin:0px;padding:0px;color:red" name="product2List[' + $addproduct2Index + '].productid">';
    					html += '<option value="' + 0 + '"> ---请选择---</option>';
 					$.each( data , function(productIndex, product){
 						
@@ -258,11 +258,15 @@ $("#findsaleperson").click(function(){
 						
 					html += '</select>'+
 								'</td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].price" id="price' + $addproduct2Index + '" readonly="readonly"/></td>'+
+								
 								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2long" id="long' + $addproduct2Index + '" onblur="longblur(this.id)"/></td>'+
 								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2width" id="width' + $addproduct2Index + '" onblur="widthblur(this.id)"/></td>'+
-								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2thick" id="thick' + $addproduct2Index + '" onblur="thickblur(this.id)"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].product2thick" id="thick' + $addproduct2Index + '"/></td>'+
+							
 								'<td><input type="text" name="product2List[' + $addproduct2Index + '].quantity" id="quantity' + $addproduct2Index + '" readonly="readonly"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].price" id="price' + $addproduct2Index + '"  readonly="readonly"/></td>'+
+								'<td><input type="text" name="product2List[' + $addproduct2Index + '].amount" id="amount' + $addproduct2Index + '"  readonly="readonly"/></td>'+
+								'<td><a href="javascript:void(0)" onclick="removetr(' + $addproduct2Index + ')">删除</a></td>'+
 								'</tr>';	
 								   						
    					
@@ -278,7 +282,12 @@ $("#findsaleperson").click(function(){
    			// }   
    		 });  
 		
-		
+		$("#toaddinvoicesubmit").click(function(){
+			
+			$("#toaddinvoiceform").submit();
+		});
+
+
 	});
 	
 	
@@ -290,10 +299,26 @@ $("#findsaleperson").click(function(){
 //		
 //		 alert("product2select1");
 //		});
-
+	$("#cheque").click(function(){
+              
+                    $("#chequenumber").removeAttr("disabled");
+               
+            
+	});
+	$("#cash").click(function(){
+		
+            $("#chequenumber").attr("disabled","disabled");
+        
+    
+	});
+	$("#bank").click(function(){
+            $("#chequenumber").attr("disabled","disabled");
+        
+    
+	});
 
 });
-function getPrice(product2selectid){
+function selectChangeEvent(product2selectid){
 	$productid = $("#product2select"+product2selectid).val();
 	
 	 $.ajax({      
@@ -304,8 +329,9 @@ function getPrice(product2selectid){
 			contentType:"application/x-www-form-urlencoded;charset=utf-8",
 			success: function(data) {       
 				console.log(data);
-			
-				$("#product2select"+product2selectid).parent().next().find("input").val(data['price']+"￥");
+			$selectInput = $("#product2select"+product2selectid);
+			$selectInput.parent().next().next().next().next().next().find("input").val(data['price']+"￥");
+			$selectInput.parent().next().next().next().find("input").val(data['thick']);
 			 }    
 			// statusCode: {        
 			//	 404: function() {         
@@ -316,40 +342,39 @@ function getPrice(product2selectid){
 //		 alert("product2select"+product2selectid);
 	
 }
-function calculateQuantity(longval, widthval, thickval){
-	return longval * widthval * thickval;
+function calculateQuantity(longval, widthval){
+	return longval * widthval;
 }
 function longblur(longid){
 	$longval = parseInt($("#"+longid).val());
 	$widthval = parseInt($("#"+longid).parent().next().find("input").val());
-	$thickval = parseInt($("#"+longid).parent().next().next().find("input").val());
 	
-		if($longval>0 && $widthval>0 && $thickval>0){
+	
+		if($longval>0 && $widthval>0){
 		
-			$quantity = calculateQuantity($longval, $widthval, $thickval)
-			$("#"+longid).parent().next().next().next().find("input").val($quantity);
+			$quantity = calculateQuantity($longval, $widthval);
+			$quantityInput = $("#"+longid).parent().next().next().next().find("input");
+			$quantityInput.val($quantity);
+			$amount = $quantity * parseInt($quantityInput.parent().next().find("input").val());
+			$quantityInput.parent().next().next().find("input").val($amount);
 		}
 	
 }
 function widthblur(widthid){
 	$longval = parseInt($("#"+widthid).parent().prev().find("input").val());
 	$widthval = parseInt($("#"+widthid).val());
-	$thickval = parseInt($("#"+widthid).parent().next().find("input").val());
+	
 
-	if($longval>0 && $widthval>0 && $thickval>0){
+	if($longval>0 && $widthval>0){
 		
-		$quantity = calculateQuantity($longval, $widthval, $thickval)
-		$("#"+widthid).parent().next().next().find("input").val($quantity);
+		$quantity = calculateQuantity($longval, $widthval);
+		$quantityInput = $("#"+widthid).parent().next().next().find("input")
+		$quantityInput.val($quantity);
+		$amount = $quantity * parseInt($quantityInput.parent().next().find("input").val());
+		$quantityInput.parent().next().next().find("input").val($amount);
 	}
 }
-function thickblur(thickid){
-	$longval = parseInt($("#"+thickid).parent().prev().prev().find("input").val());
-	$widthval = parseInt($("#"+thickid).parent().prev().find("input").val());
-	$thickval = parseInt($("#"+thickid).val());
-	
-	if($longval>0 && $widthval>0 && $thickval>0){
-		
-		$quantity = calculateQuantity($longval, $widthval, $thickval)
-		$("#"+thickid).parent().next().find("input").val($quantity);
-	}
+
+function removetr(trid){
+	$("#tr"+trid).remove();
 }

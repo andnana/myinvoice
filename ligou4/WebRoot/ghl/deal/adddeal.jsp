@@ -91,13 +91,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</div>
 					
 					<table  class="gridtable" id="addproduct2table">
-		<tr><th>产品</th><th>单价</th><th>长</th><th>宽</th><th>厚</th><th>数量</th></tr>
+		<tr><th>产品</th><th>长</th><th>宽</th><th>厚</th><th>数量</th><th>单价</th><th>此产品总计</th><th>操作</th></tr>
 		
-		<tr><td>
+		<tr id="tr0"><td>
 			
 					
 					
-							<select id="product2select0"  onchange="getPrice(0)" style="margin:0px;padding:0px;color:red" name="product2List[0].productid">
+							<select id="product2select0"  onchange="selectChangeEvent(0)" style="margin:0px;padding:0px;color:red" name="product2List[0].productid">
 								<option value="0">---请选择---</option>
 							
 								<s:iterator var="product" value="productList">
@@ -115,18 +115,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		
 		</td>
-		<td><input type="text" name="product2List[0].price" id="price0" readonly="readonly"/></td>
+		
 		<td><input type="text" name="product2List[0].product2long" id="long0" onblur="longblur(this.id)"/></td>
 		<td><input type="text" name="product2List[0].product2width" id="width0" onblur="widthblur(this.id)"/></td>
-		<td><input type="text" name="product2List[0].product2thick" id="thick0" onblur="thickblur(this.id)"/></td>
+		<td><input type="text" name="product2List[0].product2thick" id="thick0"  readonly="readonly"/></td>
+		
 		<td><input type="text" name="product2List[0].quantity" readonly="readonly"/></td>
+		<td><input type="text" name="product2List[0].price" id="price0"  readonly="readonly"/></td>
+		<td><input type="text" name="product2List[0].amount" id="amount0"  readonly="readonly"/></td>
+		<td><a href="javascript:void(0)" onclick="removetr(0)">删除</a></td>
 		</tr>
 		  
 		</table>
+				
 			<div class="control-group">
 						<label class="control-label" for="addproduct">添加产品</label>
 						<div class="controls">
 							<input type="button" value="添加" id="addproduct2" />		
+						</div>
+					</div>
+						<div class="control-group">
+						<label class="control-label" for="introduce">注解</label>
+						<div class="controls">
+							<textarea class="input-xlarge" id="introduce" name = "deal.note" >添加注解 </textarea>
 						</div>
 					</div>
 					<div class="form-actions">

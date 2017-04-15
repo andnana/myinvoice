@@ -17,9 +17,11 @@
 	<property name="product2long" type="java.lang.Integer" column="product2long" />
 	<property name="product2width" type="java.lang.Integer" column="product2width" />
 	<property name="product2thick" type="java.lang.Integer" column="product2thick" />	
+		<property name="price" type="java.lang.Double" column="price" />
+			<property name="amount" type="java.lang.Double" column="amount" />
 	<property name="quantity" type="java.lang.Integer" column="quantity" />
 	<property name="date" type="java.util.Date" column="date" />		 
-	<many-to-one name="product" column="productid" class="com.ghl.entity.Product" not-null="true" cascade="none" lazy="false" not-found="ignore"> 
+	<many-to-one name="product" column="productid" class="com.ghl.entity.Product" not-null="false" cascade="none" lazy="false" not-found="ignore"> 
 		 
 	</many-to-one>
 	</class>

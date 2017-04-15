@@ -7,6 +7,14 @@ public class Product {
 	private String productname;
 	private String introduce;
 	private Double price;
+	private Integer thick;
+	
+	public Integer getThick() {
+		return thick;
+	}
+	public void setThick(Integer thick) {
+		this.thick = thick;
+	}
 	private Date date;
 	public Integer getId() {
 		return id;

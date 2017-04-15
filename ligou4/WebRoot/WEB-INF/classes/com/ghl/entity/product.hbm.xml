@@ -17,6 +17,8 @@
 			type="java.lang.String" column="introduce" />
 				<property name="price" 
 			type="java.lang.Double" column="price" />
+			<property name="thick" 
+			type="java.lang.Integer" column="thick" />
 	<property name="date" type="java.util.Date" column="date" />
 	</class>
 </hibernate-mapping>

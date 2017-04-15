@@ -17,9 +17,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</div>
 	
 		<table  class="gridtable">
-		<tr><th>id</th><th>顾客</th><th>销售人员</th><th>ispaid</th><th>note</th><th>total</th><th>date</th><th>operation</th></tr>
-		<s:iterator var="customer" value="dealList"> 
-		<tr><td><s:property value="id"/></td><td><s:property value="customer.customername"/></td><td><s:property value="salePerson.salepersonname"/></td><td>fer</td><td>dfe</td><td>fer</td><td>fer</td><td><a href="">详细</a>|&nbsp;&nbsp;<a href="">删除</a></td></tr>
+		<tr><th>id</th><th>顾客</th><th>销售人员</th><th>是否完成支付</th><th>注解</th><th>subtotal</th><th>税</th><th>date</th><th>operation</th></tr>
+		<s:iterator var="deal" value="dealList"> 
+		<tr><td><s:property value="id"/></td><td><s:property value="customer.customername"/></td>
+		<td><s:property value="salePerson.salepersonname"/></td>
+		<td>
+		<s:if test="ispaid eq 1">
+		是
+		</s:if>
+		<s:else>
+		否
+		</s:else>
+			</td>
+		<td><s:property value="note"/></td>
+		<td><s:property value="subtotal"/></td>
+		<td><s:property value="vat"/></td>
+		<td><s:date name="date" format="yyyy-MM-dd HH:mm:ss"/></td><td><a href="dealdetail.action?dealid=<s:property value="id"/>">详细</a>|&nbsp;&nbsp;<a href="deletedeal.action?dealid=<s:property value="id"/>">删除</a></td></tr>
 		</s:iterator>
 		</table>			
 			    <ul class="pagination">

@@ -1,5 +1,6 @@
 package com.ghl.DAOimpl;
 
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -17,8 +18,6 @@ import com.ghl.entity.Deal;
 import com.ghl.entity.Product;
 import com.ghl.entity.Product2;
 import com.ghl.entity.SalePerson;
-import com.ligou4.entity.Products;
-import com.ligou4.entity.User;
 @Repository
 public class DealImpl extends HibernateDaoSupport implements DealDao {
 	
@@ -138,25 +137,47 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 	}
 
 	public void addDeal(Customer customer, List<Product2> product2List,
-			Integer salepersonid) {
+			Integer salepersonid, Deal deal, Integer vat) {
 		
-		
+		double subtotal = 0;
 		Session session = super.getSession();
-		Deal deal = new Deal();
+		
 		Customer customer2 = (Customer)session.get(Customer.class, customer.getId());
 		deal.setCustomer(customer2);
 		deal.setDate(new Date());
 		for(int i=0; i < product2List.size(); i++){
-			Product2 product2 = product2List.get(i);
-			Product product = (Product)session.get(Product.class, product2.getProductid());
-			product2.setProduct(product);
-			product2.setDate(new Date());
-			deal.getProduct2List().add(product2);
+			if(product2List.get(i) != null){
+					
+					Product2 product2 = product2List.get(i);
+					subtotal += product2.getAmount();
+					Product product = (Product)session.get(Product.class, product2.getProductid());
+					product2.setProduct(product);
+					product2.setDate(new Date());
+					deal.getProduct2List().add(product2);
+			}
 		}
+		System.out.println("*************");
+		System.out.println("salepersonid"+salepersonid+"salepersonid");
+		if(salepersonid != null){
+			System.out.println("@@@@");
 		SalePerson saleperson = (SalePerson)session.get(SalePerson.class, salepersonid);
-		
-		
 		deal.setSalePerson(saleperson);
+		}else{
+			deal.setSalePerson(null);
+			System.out.println("**deal.setSalePerson(null);**");
+		}
+		deal.setSubtotal(subtotal);
+		System.out.println(vat/100.0);
+		System.out.println("&&&&");
+		Double vatValue = subtotal * (vat / 100.0);
+	    System.out.println(vatValue);
+	    DecimalFormat df = new DecimalFormat("#.00");
+	    
+		deal.setVat(Double.parseDouble(df.format(vatValue)));
+		double total = subtotal + vatValue;
+		deal.setTotal(total);
+		System.out.println("****getVat()******");
+		System.out.println(deal.getVat());
 		session.save(deal);
 		session.flush();
 		session.close();
@@ -179,6 +200,7 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 		query.setFirstResult((page-1)*pageSize).setMaxResults(pageSize);
 		System.out.println("######pageSize"+pageSize+"page#####"+page);
 		List<Deal> list = query.list();
+		
 		session.close();
 	return list;
 	}
@@ -204,4 +226,43 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 			return rows/pageSize+1;	
 		}
 	}
+
+	public int deleteDeal(Integer dealid) {
+		System.out.println("deleteimpl"+dealid);
+		Session session = super.getSession();
+		Deal deal = (Deal)session.get(Deal.class, dealid);
+		System.out.println(deal);
+		session.delete(deal);
+		session.flush();
+		session.close();
+		return 1;
+	}
+
+	public Deal getDealById(Integer id) {
+		Session session = super.getSession();
+		Deal deal = (Deal)session.get(Deal.class, id);
+		session.close();
+		return deal;
+	}
+
+	public Double getAlreadyPayment(Integer dealid) {
+		Session session = super.getSession();
+		String hql ="select sum(deposit) from Invoice where dealid=:dealid";
+		Query query = 
+			session.createQuery(hql);
+		query.setParameter("dealid", dealid);
+		List list = query.list();
+		Double rows = 0.0;
+		System.out.println(list.size()+"LIJKJLJLJKL");
+			System.out.println(list.get(0));
+			if(list.get(0) != null){
+		   rows = new Double(
+				list.get(0).toString());
+			}
+		
+		
+		 return rows;
+	}
+
+
 }

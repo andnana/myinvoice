@@ -14,9 +14,13 @@ public interface DealDao {
 	public List<Customer> findCustomer(String customername, String contact);
 	public List<SalePerson> findSalePerson(String salePersonName, String contact);
 	public List<Product> getProductList();
-	public void addDeal(Customer customer, List<Product2> product2List, Integer salepersonid);
+	public void addDeal(Customer customer, List<Product2> product2List, Integer salepersonid, Deal deal, Integer vat);
 	public Product findProductById(Integer productid);
 	public List<Deal> getDealList(Integer page, Integer pageSize);
 	public int getTotalDealItem();
 	public int getDealTotalPage(int pageSize);
+	public int deleteDeal(Integer dealid);
+	public Deal getDealById(Integer id);
+	public Double getAlreadyPayment(Integer dealid);
+
 }

@@ -29,7 +29,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<textarea class="input-xlarge" id="introduce" name = "product.introduce" >产品介绍内容 </textarea>
 						</div>
 					</div>
-					
+					<div class="control-group">
+						<label class="control-label" for="thick">厚度</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="price" name = "product.thick" />
+						</div>
+					</div>
 					<div class="control-group">
 						<label class="control-label" for="price">单价</label>
 						<div class="controls">

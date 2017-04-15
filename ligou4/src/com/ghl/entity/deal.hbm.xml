@@ -23,7 +23,7 @@
 	<property name="note" type="java.lang.String" column="note" />
 	<property name="date" type="java.util.Date" column="date" />
 
-			<bag name="invoiceList" inverse="false" lazy="false" cascade="delete" order-by="id desc">
+			<bag name="invoiceList" inverse="false" lazy="false" cascade="all" order-by="id desc">
 				<key column="dealid"> </key>
 			<one-to-many class="com.ghl.entity.Invoice"/>
 		</bag>
@@ -34,7 +34,7 @@
 		<many-to-one name="customer" column="customerid" class="com.ghl.entity.Customer" not-null="true" cascade="none" lazy="false" not-found="ignore"> 
 		 
 	</many-to-one>
-	<many-to-one name="salePerson" column="salepersonid" class="com.ghl.entity.SalePerson" not-null="true" cascade="none" lazy="false" not-found="ignore"> 
+	<many-to-one name="salePerson" column="salepersonid" class="com.ghl.entity.SalePerson" not-null="false" cascade="none" lazy="false" not-found="ignore"> 
 		 
 	</many-to-one>		
 	</class>

@@ -47,7 +47,14 @@
 			
 		</action>
 		<action name="adddeal" class="addDealAction">
+			<param name="vat">5</param>
+				<result name="success" type="redirectAction">
+				deallist.action
+			</result>
 			
+		</action>
+		<action name="addinvoice" class="addInvoiceAction">
+			<param name="vat">5</param>
 				<result name="success" type="redirectAction">
 				deallist.action
 			</result>
@@ -97,6 +104,12 @@
 				/ghl/saleperson/addsaleperson.jsp
 			</result>
 		</action>
+			<action name="toaddinvoice" class="toAddInvoiceAction">
+			<result name="success">
+				/ghl/deal/addinvoice.jsp
+			</result>
+		</action>
+		
 			<action name="findcustomer" class="findCustomerAction">
 				
 			
@@ -118,10 +131,22 @@
 			<param name="root">productList</param>
 			</result>
 		</action>
+			<action name="dealdetail" class="dealDetailAction">
+			<result name="success">
+				/ghl/deal/dealdetail.jsp
+			</result>
+			
+		</action>
 		<action name="findproductbyid" class="findProductByIdAction">
 			<result name="success" type="json">
 			<param name="root">product</param>
 			</result>
+		</action>
+		<action name="deletedeal" class="deleteDealAction">
+			<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			
 		</action>
 		<action name="toIndex"  class="toIndexAction">
 		<param name="size">5</param>

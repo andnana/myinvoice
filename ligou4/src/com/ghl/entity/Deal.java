@@ -20,7 +20,7 @@ public class Deal {
 	private String note;
 	private Date date;
 	private SalePerson salePerson = new SalePerson();
-	
+	private List<Product2> product2List = new ArrayList<Product2>();
 	public SalePerson getSalePerson() {
 		return salePerson;
 	}
@@ -35,7 +35,7 @@ public class Deal {
 	public void setInvoiceList(List<Invoice> invoiceList) {
 		this.invoiceList = invoiceList;
 	}
-	private List<Product2> product2List = new ArrayList<Product2>();
+	
 	
 	
 	public Customer getCustomer() {

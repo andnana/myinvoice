@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import com.ghl.action.BaseAction;
 import com.ghl.dao.DealDao;
 import com.ghl.entity.Customer;
+import com.ghl.entity.Deal;
 import com.ghl.entity.Product2;
 @Controller
 @Scope("prototype")
@@ -21,10 +22,38 @@ public class AddDealAction extends BaseAction{
 	private DealDao dealDao;
 	
 	private List<Product2> product2List = new ArrayList<Product2>();
-
+	private Deal deal;
 	private Customer customer;
 	private Integer salepersonid;
+	private Integer vat = 5;
 	
+	
+
+
+
+
+
+
+
+	public Integer getVat() {
+		return vat;
+	}
+
+
+	public void setVat(Integer vat) {
+		this.vat = vat;
+	}
+
+
+	public Deal getDeal() {
+		return deal;
+	}
+
+
+	public void setDeal(Deal deal) {
+		this.deal = deal;
+	}
+
 
 	public Integer getSalepersonid() {
 		return salepersonid;
@@ -67,21 +96,19 @@ public class AddDealAction extends BaseAction{
 
 
 	public String execute(){
+		System.out.println("*****test01");
+		System.out.println(product2List.get(0));
 		System.out.println("*****product2List*****");
 		System.out.println(product2List);
 		System.out.println("*************customer****");
 		System.out.println(customer);
 		System.out.println("**********salepersonid****");
 		System.out.println(salepersonid);
-		System.out.println("*****product2List.get(0).getProductid()*****");
-		System.out.println(product2List.get(0).getProductid());
-		System.out.println("product2List.get(0).getProduct2long()");
-		System.out.println(product2List.get(0).getProduct2long());
 		System.out.println(("*******customer.getId()**********"));
 		System.out.println(customer.getId());
 		System.out.println("*******customer.getContact()******");
 		System.out.println(customer.getContact());
-		dealDao.addDeal(customer, product2List, salepersonid);
+		dealDao.addDeal(customer, product2List, salepersonid, deal, vat);
 	
 		return "success";
 	}

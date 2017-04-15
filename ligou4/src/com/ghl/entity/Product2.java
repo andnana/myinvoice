@@ -12,8 +12,15 @@ public class Product2 {
 	private Integer productid;
 	private Product product;
 	private Double price;
+	private Double amount;
 	
 	
+	public Double getAmount() {
+		return amount;
+	}
+	public void setAmount(Double amount) {
+		this.amount = amount;
+	}
 	public Double getPrice() {
 		return price;
 	}
