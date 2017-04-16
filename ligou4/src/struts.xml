@@ -110,6 +110,11 @@
 			</result>
 		</action>
 		
+			<action name="toprintinvoice" class="toPrintInvoiceAction">
+			<result name="success">
+				/ghl/deal/printinvoice.jsp
+			</result>
+		</action>
 			<action name="findcustomer" class="findCustomerAction">
 				
 			

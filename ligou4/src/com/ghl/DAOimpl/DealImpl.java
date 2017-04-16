@@ -141,7 +141,7 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 		
 		double subtotal = 0;
 		Session session = super.getSession();
-		
+		DecimalFormat df = new DecimalFormat("#.00");
 		Customer customer2 = (Customer)session.get(Customer.class, customer.getId());
 		deal.setCustomer(customer2);
 		deal.setDate(new Date());
@@ -166,12 +166,12 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 			deal.setSalePerson(null);
 			System.out.println("**deal.setSalePerson(null);**");
 		}
-		deal.setSubtotal(subtotal);
+		deal.setSubtotal(Double.parseDouble(df.format(subtotal)));
 		System.out.println(vat/100.0);
 		System.out.println("&&&&");
 		Double vatValue = subtotal * (vat / 100.0);
 	    System.out.println(vatValue);
-	    DecimalFormat df = new DecimalFormat("#.00");
+	    
 	    
 		deal.setVat(Double.parseDouble(df.format(vatValue)));
 		double total = subtotal + vatValue;
@@ -259,7 +259,7 @@ public class DealImpl extends HibernateDaoSupport implements DealDao {
 		   rows = new Double(
 				list.get(0).toString());
 			}
-		
+			session.close();
 		
 		 return rows;
 	}

@@ -18,24 +18,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="<%=basePath %>ghl/css/bootstrap.css" rel="stylesheet">
 	<link href="<%=basePath %>ghl/css/site.css" rel="stylesheet">
     <link href="<%=basePath %>ghl/css/bootstrap-responsive.css" rel="stylesheet">
-    <script type="text/javascript" charset="utf-8">
-window.UEDITOR_HOME_URL = "<%=basePath %>/ghl/ueditor/"; //UEDITOR_HOME_URL、config、all这三个顺序不能改变
-</script>
-    <script type="text/JavaScript" charset="utf-8" src="<%=basePath %>ghl/ueditor/ueditor.config.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=basePath %>ghl/ueditor/ueditor.all.min.js"></script>
-    <script type="text/javascript" charset="utf-8" src="<%=basePath %>ghl/ueditor/lang/zh-cn/zh-cn.js"></script>
-<link href="<%=basePath %>ghl/ueditor/themes/default/css/ueditor.css" type="text/css" rel="stylesheet">
+    <script type="text/javascript" src="<%=basePath %>ghl/js/jquery-1.9.1.min.js"></script> 
+   <script type="text/javascript" src="<%=basePath %>ghl/js/jQuery.print.js"></script>   
 
-</link>
-<script src="<%=basePath %>ghl/ueditor/third-party/codemirror/codemirror.js" type="text/javascript" defer="defer">
+<script type="text/javascript" src="<%=basePath %>ghl/js/02.js"></script> 
 
-</script>
-<link rel="stylesheet" type="text/css" href="<%=basePath %>ghl/ueditor/third-party/codemirror/codemirror.css">
+   
 
 
-<script src="<%=basePath %>ghl/ueditor/third-party/zeroclipboard/ZeroClipboard.js" type="text/javascript" defer="defer">
-
-</script>
   <script type="text/javascript" src="<%=basePath %>ghl/tinymce/tinymce.min.js"></script>
 <script>
 	/*	tinyMCE.init(
@@ -53,8 +43,7 @@ window.UEDITOR_HOME_URL = "<%=basePath %>/ghl/ueditor/"; //UEDITOR_HOME_URL、co
 		tinyMCE.activeEditor.setContent("dfre");
 	}*/
 </script> 
-<script type="text/javascript" src="<%=basePath %>ghl/js/jquery.js"></script>  
-<script type="text/javascript" src="<%=basePath %>ghl/js/02.js"></script> 
+
   </head>
   <body>
   

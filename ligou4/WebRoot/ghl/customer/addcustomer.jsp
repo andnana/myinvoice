@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 						
 					<div class="form-actions">
-						<input type="submit" class="btn btn-success btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						<input type="submit" class="btn btn-default btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
 					</div>						
 			</fieldset></form>
 		  </div>

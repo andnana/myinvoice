@@ -251,3 +251,53 @@ table.gridtable td:nth-child(8){
 	border-color: #666666;
 	background-color: #ffffff;
 }
+#printdiv{
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-left:auto;
+	margin-right:auto;
+	border:silver 3px solid;
+	text-align:center;
+	width:700px;
+	height:800px;
+	
+}
+#logo{
+	float:left;
+	width:200px;
+	padding: 15px;
+}
+#invoicepagetop{
+	display:table-cell;
+	width:700px;
+	height:140px;
+	vertical-align:bottom;
+}
+#invoicepagemyinfo{
+	display:table-cell;
+
+	vertical-align:bottom;
+	width:500px;
+	height:120px;
+	border:red solid 2px;
+	
+	padding-left:40px;
+	padding-right:20px;
+	padding-bottom:12px;
+	font-size:14px;
+	font-weight:bolder;
+}
+#printbtndiv{
+		margin-top:5px;
+	margin-bottom:15px;
+	margin-left:auto;
+	margin-right:auto;
+	border:silver 0px solid;
+	text-align:center;
+	width:700px;
+	height:80px;
+	
+}
+.clearboth{
+	clear:both;
+}

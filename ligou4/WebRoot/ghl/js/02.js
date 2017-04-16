@@ -317,6 +317,7 @@ $("#findsaleperson").click(function(){
     
 	});
 
+		
 });
 function selectChangeEvent(product2selectid){
 	$productid = $("#product2select"+product2selectid).val();
@@ -330,7 +331,7 @@ function selectChangeEvent(product2selectid){
 			success: function(data) {       
 				console.log(data);
 			$selectInput = $("#product2select"+product2selectid);
-			$selectInput.parent().next().next().next().next().next().find("input").val(data['price']+"￥");
+			$selectInput.parent().next().next().next().next().next().find("input").val(data['price']);
 			$selectInput.parent().next().next().next().find("input").val(data['thick']);
 			 }    
 			// statusCode: {        

@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  </s:iterator>
 		</table>
 				<div class="control-group">
-						<label class="control-label" for="dealdetailsubtotal">subtotal</label>
+						<label class="control-label" for="dealdetailsubtotal">税前总金额</label>
 						<div class="controls">
 							<input type="text" class="input-xlarge" id="dealdetailsubtotal" name="dealdetailsubtotal" value="<s:property value="deal.subtotal"/>" readonly="readonly" />
 						</div>
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 						<div class="control-group">
-						<label class="control-label" for="dealdetailvat">total</label>
+						<label class="control-label" for="dealdetailvat">税后总金额</label>
 						<div class="controls">
 							<input type="text" class="input-xlarge" id="dealdetailvat" name="dealdetailtotal" value="<s:property value="deal.total"/>" readonly="readonly" />
 						</div>
@@ -84,12 +84,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type="text" class="input-xlarge" id="dealdetailvat" name="alreadyPayment" value="<s:property value="alreadyPayment"/>" readonly="readonly" />
 						</div>
 					</div>
+						<div class="control-group">
+						<label class="control-label" for="alreadyPayment">余款</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="dealdetailvat" name="alreadyPayment" value="<s:property value="deal.total - alreadyPayment"/>"  readonly="readonly" />
+						</div>
+					</div>
 					<form id="toaddinvoiceform" class="form-horizontal" action="toaddinvoice.action"  method="post">
 					<input type="hidden" name="dealid" value="<s:property value="deal.id"/>" />
 					<div class="form-actions">
-						<input type="submit" id="toaddinvoicesubmit" class="btn btn-success btn-large" value="添加发票" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						<s:if test="deal.ispaid ==1">
+						<input type="submit" id="toaddinvoicesubmit" class="btn btn-large disabled" disabled="disabled" value="添加一次付款" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						</s:if>
+						<s:else>
+						<input type="submit" id="toaddinvoicesubmit" class="btn btn-default btn-large" value="添加一次付款" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						</s:else>
+						
 					</div>
 						</form>
+									<table  class="gridtable" id="addproduct2table">
+		<tr><th>id</th><th>本次付款金额</th><th>本次付款后余款</th><th>付款方式</th><th>支票号码</th><th>附加信息</th><th>日期</th><th>操作</th></tr>
+		<s:iterator var="invoice" value="deal.invoiceList">
+		<tr>
+		<td><s:property value="id"/></td>
+		<td><s:property value="deposit"/></td>
+		<td><s:property value="balance"/></td>
+		<td>
+		<s:if test="paymentmethod eq 1">
+			现金
+		</s:if>
+		<s:elseif test="paymentmethod eq 2">
+			银行转帐
+		</s:elseif>
+		<s:elseif test="paymentmethod eq 3">
+		支票
+		</s:elseif>
+		<s:else>
+		未知
+		</s:else>
+
+		
+		</td>
+		<td>
+			<s:if test="paymentmethod eq 3">
+		<s:property value="chequenumber"/>
+		</s:if>		
+		</td>
+		<td><s:property value="note"/></td>
+		<td><s:date name="date" format="yyyy-MM-dd HH:mm:ss"/></td>
+		<td><a href="toprintinvoice.action?invoiceid=<s:property value="id"/>">打印</a></td>
+		</tr>
+		  </s:iterator>
+		</table>
 		  </div>
     
 		

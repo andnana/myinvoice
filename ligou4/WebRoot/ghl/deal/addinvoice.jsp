@@ -28,6 +28,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 							<input type="text" class="input-xlarge" id="alreadyPayment" name="alreadyPayment" value="<s:property value="alreadyPayment"/>"  readonly="readonly" />
 						</div>
 					</div>
+					<div class="control-group">
+						<label class="control-label" for="balance">余款</label>
+						<div class="controls">
+							<input type="text" class="input-xlarge" id="alreadyPayment" name="balance" value="<s:property value="deal.total - alreadyPayment"/>"  readonly="readonly" />
+						</div>
+					</div>
+					
 	<form class="form-horizontal" action="addinvoice.action"  method="post">
 					<fieldset>
 					
@@ -46,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				
 				<table>
 					<tr>
-					<td><label class="control-label" for="cash">地址</label><input id="cash" type="radio" name="invoice.paymentmethod" value="1" checked="checked" /></td>
+					<td><label class="control-label" for="cash">现金</label><input id="cash" type="radio" name="invoice.paymentmethod" value="1" checked="checked" /></td>
 						<td><label class="control-label" for="bank">银行转帐</label><input id="bank" type="radio" name="invoice.paymentmethod" value="2"/></td>
 						<td><label class="control-label" for="cheque">支票</label><input id="cheque" type="radio" name="invoice.paymentmethod" value="3"/></td>
 						<td><label class="control-label" for="chequenumber">支票号码</label><input id="chequenumber" name="invoice.chequenumber" value="" disabled="disabled" /></td>
@@ -54,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</table>
 						<input name="dealid" type="hidden" value="<s:property value="dealid" />" />
 					<div class="form-actions">
-						<input type="submit" class="btn btn-success btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						<input type="submit" class="btn btn-default btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
 					</div>						
 			</fieldset></form>
 		  </div>

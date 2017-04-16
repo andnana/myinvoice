@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<td><input type="text" name="product2List[0].product2width" id="width0" onblur="widthblur(this.id)"/></td>
 		<td><input type="text" name="product2List[0].product2thick" id="thick0"  readonly="readonly"/></td>
 		
-		<td><input type="text" name="product2List[0].quantity" readonly="readonly"/></td>
+		<td><input type="text" name="product2List[0].quantity" id="quantity0" readonly="readonly"/></td>
 		<td><input type="text" name="product2List[0].price" id="price0"  readonly="readonly"/></td>
 		<td><input type="text" name="product2List[0].amount" id="amount0"  readonly="readonly"/></td>
 		<td><a href="javascript:void(0)" onclick="removetr(0)">删除</a></td>
@@ -135,13 +135,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</div>
 					</div>
 						<div class="control-group">
-						<label class="control-label" for="introduce">注解</label>
+						<label class="control-label" for="introduce">附加信息</label>
 						<div class="controls">
-							<textarea class="input-xlarge" id="introduce" name = "deal.note" >添加注解 </textarea>
+							<textarea class="input-xlarge" id="introduce" name = "deal.note" >添加信息 </textarea>
 						</div>
 					</div>
 					<div class="form-actions">
-						<input type="submit" class="btn btn-success btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
+						<input type="submit" class="btn btn-default btn-large" value="添加" /> <!-- <a class="btn" href="users.html">取消</a> -->
 					</div>
 		</form>
 				
