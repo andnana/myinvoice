@@ -1,16 +1,14 @@
 <%@page pageEncoding="utf-8" 
 contentType="text/html;charset=utf-8" %>
 <%@taglib uri="/struts-tags" prefix="s"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <jsp:include page="../header.jsp"></jsp:include>
-<script type="text/javascript" >
-var URL = window.UEDITOR_HOME_URL || "ghl/ueditor/";
-</script>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
         <div class="span9">
         <div class="row-fluid">
 			<div class="page-header">

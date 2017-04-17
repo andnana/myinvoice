@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</td>
 		<td><s:property value="note"/></td>
 		<td><s:date name="date" format="yyyy-MM-dd HH:mm:ss"/></td>
-		<td><a href="toprintinvoice.action?invoiceid=<s:property value="id"/>">打印</a></td>
+		<td><a href="toprintinvoice.action?invoiceid=<s:property value="id"/>&dealid=<s:property value="deal.id"/>">打印</a></td>
 		</tr>
 		  </s:iterator>
 		</table>

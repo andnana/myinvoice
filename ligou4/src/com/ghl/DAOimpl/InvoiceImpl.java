@@ -69,4 +69,12 @@ public class InvoiceImpl  extends HibernateDaoSupport implements InvoiceDao {
 		session.close();
 		return invoice;
 	}
+	public Deal getDealById(Integer dealid) {
+		System.out.println("****dealid*****");
+		System.out.println(dealid);
+		Session session = super.getSession();
+		Deal deal = (Deal)session.get(Deal.class, dealid);
+		session.close();
+		return deal;
+	}
 }
