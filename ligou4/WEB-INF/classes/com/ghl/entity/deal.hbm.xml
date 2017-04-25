@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.ghl.entity.Deal" 
+		table="deal">
+		<id name="id" type="integer" 
+			column="ID">
+			<!-- 用来指明主键的生成方式 -->
+			<generator class="native" />
+				
+		</id>
+		
+			
+	<property name="ispaid" type="java.lang.Integer" column="ispaid" />
+	<property name="iscuttail100" type="java.lang.Integer" column="iscuttail100" />
+	<property name="iscuttail1000" type="java.lang.Integer" column="iscuttail1000" />
+	<property name="discount" type="java.lang.Double" column="discount" />
+	<property name="vat" type="java.lang.Double" column="vat" />
+	<property name="subtotal" type="java.lang.Double" column="subtotal" />
+	<property name="total" type="java.lang.Double" column="total" />
+	<property name="note" type="java.lang.String" column="note" />
+	<property name="date" type="java.util.Date" column="date" />
+    <property name="balance" type="java.lang.Double" column="balance" /> 
+			<bag name="invoiceList" inverse="false" lazy="false" cascade="all" order-by="id desc">
+				<key column="dealid"> </key>
+			<one-to-many class="com.ghl.entity.Invoice"/>
+		</bag>
+			<bag name="product2List" inverse="false" lazy="false" cascade="all" order-by="id desc">
+				<key column="dealid"> </key>
+			<one-to-many class="com.ghl.entity.Product2"/>
+		</bag>
+		<many-to-one name="customer" column="customerid" class="com.ghl.entity.Customer" not-null="true" cascade="none" lazy="false" not-found="exception"> 
+		 
+	</many-to-one>
+	<many-to-one name="salePerson" column="salepersonid" class="com.ghl.entity.SalePerson" not-null="false" cascade="none" lazy="false" not-found="ignore"> 
+		 
+	</many-to-one>		
+	</class>
+</hibernate-mapping>

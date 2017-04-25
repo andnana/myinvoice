@@ -1,5 +1,5 @@
 ﻿# Host: localhost  (Version: 5.5.45)
-# Date: 2017-04-15 19:41:00
+# Date: 2017-04-25 13:50:21
 # Generator: MySQL-Front 5.3  (Build 4.214)
 
 /*!40101 SET NAMES utf8 */;
@@ -175,40 +175,13 @@ CREATE TABLE `customer` (
   `address` varchar(255) DEFAULT '',
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "customer"
 #
 
-INSERT INTO `customer` VALUES (1,'小王','15534212123','大连','2017-04-11 11:33:42'),(2,'小李','15534212123','大连','2017-04-11 12:33:42'),(3,'小于','15534212123','大连','2017-04-11 13:33:42'),(4,'小赵','15534212123','大连','2017-04-11 14:33:42'),(5,'小孙','15534212123','大连','2017-04-11 15:33:42'),(9,'fwef34534','wefwe','wefwe','2017-04-11 16:33:42'),(10,'dfgfgersg','23454654','dfgsdfgdf','2017-04-11 10:33:42'),(11,'dfgdfgdsgsdgfd','gdfgdf','fgdsfgsd','2017-04-11 18:34:21'),(12,'cxvxc','cvsdv','dvs','2017-04-11 18:35:59'),(13,'fbgdg','fdgdf','dfgdsf','2017-04-11 18:38:29'),(14,'dsf','esfs','fesfs','2017-04-11 18:38:54'),(15,'ghhhjj','fghjhhj','fgjhgj','2017-04-11 18:47:57'),(16,'kjljkl','jkljkl','jkl;jkjkllkj','2017-04-11 18:48:47'),(17,'aaaa','fdfgfg','bbbdfgdfds','2017-04-11 18:49:58'),(18,'cccxxxx','2344221234','gfgagafadsfe','2017-04-14 20:28:19');
-
-#
-# Structure for table "deal"
-#
-
-DROP TABLE IF EXISTS `deal`;
-CREATE TABLE `deal` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `customerid` int(11) NOT NULL DEFAULT '0',
-  `ispaid` int(1) NOT NULL DEFAULT '0',
-  `iscuttail100` int(1) NOT NULL DEFAULT '0',
-  `iscuttail1000` int(1) NOT NULL DEFAULT '0',
-  `discount` double NOT NULL DEFAULT '1',
-  `vat` double DEFAULT '0',
-  `subtotal` double DEFAULT '0',
-  `total` double DEFAULT '0',
-  `note` text,
-  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
-  `salepersonid` int(11) DEFAULT '0',
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
-
-#
-# Data for table "deal"
-#
-
-INSERT INTO `deal` VALUES (43,16,0,0,0,0,88.6,1772,1860.6,'添加注解 ','2017-04-15 19:11:06',11);
+INSERT INTO `customer` VALUES (1,'小王','15534212123','大连','2017-04-11 11:33:42'),(2,'小李','15534212123','大连','2017-04-11 12:33:42'),(4,'大赵','1551456456','青岛','2017-04-19 11:16:30'),(5,'hjjjj','2342523','武汉','2017-04-20 10:46:25'),(6,'ajibax','23525255','mushin','2017-04-20 14:56:37');
 
 #
 # Structure for table "f_pic"
@@ -290,13 +263,13 @@ CREATE TABLE `invoice` (
   `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `dealid` int(11) DEFAULT '0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "invoice"
 #
 
-INSERT INTO `invoice` VALUES (4,60,1800.6,'附加信息 ',1,NULL,'2017-04-15 19:38:43',43);
+INSERT INTO `invoice` VALUES (34,50,504.4,'附加信息 ',1,NULL,'2017-04-19 18:51:10',99);
 
 #
 # Structure for table "news"
@@ -357,13 +330,13 @@ CREATE TABLE `product` (
   `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `thick` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "product"
 #
 
-INSERT INTO `product` VALUES (1,'这是产品名称。玻璃1。','这里是介绍',22,'2017-04-10 18:51:09',2),(2,'这是产品名称。玻璃2。','这里是介绍',12,'2017-04-10 18:51:59',3),(3,'这是产品名称。玻璃3。','这里是介绍',32,'2017-04-11 08:50:49',1),(4,'这是产品名称。玻璃4。','这里是介绍',36,'2017-04-11 08:51:55',2),(6,'fgsdfgdfsg','<p>产品介绍内容fg</p>',46,'2017-04-12 09:25:33',3),(7,'fsdghdfg','<p>gfhfghfgh</p>',11,'2017-04-12 09:29:44',4),(8,'ghfg','<p>产品介绍内容ghfhfgh</p>',12,'2017-04-12 09:30:20',1),(9,'fdgdf','<p>产品介绍内容fdg</p>',32,'2017-04-12 09:32:33',2),(10,'dcgdsf','<p>产品介绍内容fds</p>',65,'2017-04-12 09:35:24',1),(11,'fgsdfg','<p>产品介绍内容fdsghdfg</p>',55,'2017-04-12 09:35:47',2),(12,'sdfsda','<p>产品介绍内容df</p>',44,'2017-04-12 09:36:32',3),(13,'fgfdg','<p>产品介绍内容3</p>',32,'2017-04-12 09:38:49',2),(14,'gfdgdsf','<p>产品介绍内容fd</p>',22,'2017-04-12 09:40:07',3),(15,'dfgdfsg','<p>产品介绍内容vbgsdf</p>',33,'2017-04-12 09:42:07',4),(16,'gfdfg','<p>产品介绍内容dfg</p>',234,'2017-04-12 09:46:15',2),(17,'gfddgre','<p>产品介绍内容fdg</p>',344,'2017-04-12 09:46:58',1),(18,'sdfsae','fefsefdfsdaf',23,'2017-04-12 09:54:16',2),(19,'adfsss','产品介绍内容 ddd',23,'2017-04-14 20:27:16',2);
+INSERT INTO `product` VALUES (2,'这是产品名称。玻璃222。','产品介绍内容 ',12,'2017-04-19 11:32:56',3),(3,'这是产品名称。玻璃3。','这里是介绍',32,'2017-04-11 08:50:49',1),(20,'产品4','产品介绍内容 ',5,'2017-04-18 16:02:27',1),(21,'glass123123','产品介绍内容 ',25,'2017-04-20 13:46:09',1);
 
 #
 # Structure for table "product2"
@@ -381,14 +354,16 @@ CREATE TABLE `product2` (
   `product2thick` int(11) DEFAULT '0',
   `price` double DEFAULT '0',
   `amount` double NOT NULL DEFAULT '0',
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`Id`),
+  KEY `product2toproduct_fk` (`productid`),
+  CONSTRAINT `product2toproduct_fk` FOREIGN KEY (`productid`) REFERENCES `product` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "product2"
 #
 
-INSERT INTO `product2` VALUES (53,16,2,3,'2017-04-15 19:11:06',43,6,2,NULL,1404),(54,18,4,4,'2017-04-15 19:11:06',43,16,2,NULL,368);
+INSERT INTO `product2` VALUES (140,3,3,3,'2017-04-19 18:50:27',99,9,1,32,288),(141,2,4,5,'2017-04-19 18:50:27',99,20,3,12,240),(142,3,3,4,'2017-04-20 10:42:27',100,12,1,32,384);
 
 #
 # Structure for table "products"
@@ -452,13 +427,45 @@ CREATE TABLE `saleperson` (
   `address` varchar(255) DEFAULT '',
   `date` datetime DEFAULT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 #
 # Data for table "saleperson"
 #
 
-INSERT INTO `saleperson` VALUES (5,'salepersonnamenamename','23235234','saleperson addressaddress','2017-04-11 16:38:24'),(8,'gerghe','5565673','erhreheryer','2017-04-12 08:32:51'),(9,'gerghe','5565673','erhreheryer','2017-04-12 08:34:58'),(10,'hjtgh','hjgh','jkhkgj','2017-04-12 08:36:14'),(11,'fdhfgh','hjghjhjk','kyukytuk','2017-04-12 08:38:10'),(12,'fgjgh','jghk','jhkjhkuy','2017-04-12 08:38:34'),(13,'fdgerg','regerg','ergre','2017-04-12 09:19:18'),(14,'addfffs','12322334','fgggsdffsdf','2017-04-14 20:27:46');
+INSERT INTO `saleperson` VALUES (5,'salepersonnamenamename','23235234','saleperson addressaddress','2017-04-11 16:38:24'),(8,'gergheee','5565673234','erhreheryer','2017-04-19 11:36:51'),(11,'fdhfgh','hjghjhjk','kyukytuk','2017-04-12 08:38:10'),(12,'sssss','234234','四川','2017-04-20 13:45:21');
+
+#
+# Structure for table "deal"
+#
+
+DROP TABLE IF EXISTS `deal`;
+CREATE TABLE `deal` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `customerid` int(11) DEFAULT '0',
+  `ispaid` int(1) DEFAULT '0' COMMENT '0为支付未完成1为支付已完成',
+  `iscuttail100` int(1) NOT NULL DEFAULT '0',
+  `iscuttail1000` int(1) NOT NULL DEFAULT '0',
+  `discount` double NOT NULL DEFAULT '1',
+  `vat` double DEFAULT '0',
+  `subtotal` double DEFAULT '0',
+  `total` double DEFAULT '0',
+  `note` text,
+  `date` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `salepersonid` int(11) DEFAULT '0',
+  `balance` double DEFAULT '0',
+  PRIMARY KEY (`Id`),
+  KEY `dealtocustomer` (`customerid`),
+  KEY `dealtosaleperson` (`salepersonid`),
+  CONSTRAINT `dealtocustomer` FOREIGN KEY (`customerid`) REFERENCES `customer` (`Id`),
+  CONSTRAINT `dealtosaleperson` FOREIGN KEY (`salepersonid`) REFERENCES `saleperson` (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "deal"
+#
+
+INSERT INTO `deal` VALUES (99,2,0,0,0,0,26.4,528,554.4,'添加信息 ','2017-04-19 18:50:27',5,504.4),(100,2,0,0,0,0,19.2,384,403.2,'添加信息 ','2017-04-20 10:42:27',12,403.2);
 
 #
 # Structure for table "scoretb"
@@ -614,6 +621,31 @@ CREATE TABLE `thirdsort` (
 /*!40000 ALTER TABLE `thirdsort` DISABLE KEYS */;
 INSERT INTO `thirdsort` VALUES (1,'夹克衫',1),(2,'牛仔装',2),(3,'格子纹',3),(4,'连衣帽类',4);
 /*!40000 ALTER TABLE `thirdsort` ENABLE KEYS */;
+
+#
+# Structure for table "user"
+#
+
+DROP TABLE IF EXISTS `user`;
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(50) DEFAULT NULL,
+  `password` char(32) DEFAULT NULL,
+  `email` varchar(50) DEFAULT NULL,
+  `gender` tinyint(1) DEFAULT NULL,
+  `phone` char(25) DEFAULT NULL,
+  `address` varchar(100) DEFAULT NULL,
+  `description` text,
+  `regtime` datetime DEFAULT NULL,
+  `issuper` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+#
+# Data for table "user"
+#
+
+INSERT INTO `user` VALUES (2,'rrr中文','123','dfgrerw@163.com',1,'123423223','上海','个人介绍内容 aaa','2017-04-19 15:24:33',0),(3,'sss中文','123','drdeefee@163.com',1,'23443345','北京','个人介绍内容 geeref','2017-04-19 15:25:13',0),(4,'ggg中文','123','eerfef@163.com',0,'34234523423','深圳','个人介绍内容 fgdsg','2017-04-19 15:26:03',0),(5,'www','123','hgfdgdf@163.com',1,'45234234','杭州','dfdddfdfe','2017-04-19 15:30:31',1);
 
 #
 # Structure for table "user_products"

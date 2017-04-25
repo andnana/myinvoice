@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+    "http://struts.apache.org/dtds/struts-2.1.7.dtd">
+
+<struts>
+<constant name="struts.i18n.encoding" value="utf-8"/>
+	<package name="ligou4" 
+		extends="json-default">
+		<interceptors>
+		<!-- 	<interceptor name="interceptorfont" class="com.ghl.interceptor.FontInterceptor"/> -->
+		 	<interceptor name="loginInterceptor" class="com.ghl.interceptor.LoginInterceptor"/> 
+		</interceptors>
+	<!-- 	<default-interceptor-ref name="loginInterceptor" /> -->
+		<default-action-ref name="error"></default-action-ref>
+		<global-results>
+		<result name="login">
+			/ghl/login.jsp
+			</result>
+		</global-results>
+	 	<action name="error">
+			<result name="success" type="redirect">
+				/error.jsp
+			</result>
+		</action> 
+		
+		<!-- 
+		
+		personal
+		 -->
+		 <action name="personal" class="personalAction">
+		 	<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		 	<result name="success">
+		 		/ghl/personal/personal.jsp
+		 	</result>
+		 </action>
+		 <action name="updatepersonal" class="updatePersonalAction">
+		  	<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirect">
+				personal.action?userid=${user.id}
+			</result>
+		</action>
+		<!--  user -->
+		<action name="superupdateuser" class="superUpdateUserAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirect">
+				userdetail.action?userid=${user.id}
+			</result>
+		</action>
+			<action name="toadduser" class="toAddUserAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				/ghl/user/adduser.jsp
+			</result>
+		</action>
+		<action name="adduser" class="addUserAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				userlist.action
+			</result>
+		</action>
+		<action name="userlist" class="userListAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/user/userlist.jsp
+			</result>
+		</action>
+		<action name="userdetail" class="userDetailAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/user/userdetail.jsp
+			</result>
+		</action>
+		<action name="deleteuser" class="deleteUserAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				userlist.action
+			</result>
+		</action>
+		<action name="addsaleperson" class="addSalePersonAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				salepersonlist.action
+			</result>
+		</action>
+		<action name="updatesaleperson" class="updateSalePersonAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirect">
+				tosalepersondetail.action?salepersonid=${salePerson.id}
+			</result>
+		</action>
+		<action name="tosalepersondetail" class="toSalePersonDetailAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/saleperson/salepersondetail.jsp
+			</result>
+		</action>
+			<action name="addcustomer" class="addCustomerAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			
+				<result name="success" type="redirectAction">
+				customerlist.action
+			</result>
+			
+		</action>
+			<action name="updatecustomer" class="updateCustomerAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			
+				<result name="success" type="redirect">
+				tocustomerdetail.action?customerid=${customer.id}
+			</result>
+			
+		</action>
+	
+			<action name="addproduct" class="addProductAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			
+				<result name="success" type="redirectAction">
+				productlist.action
+			</result>
+			
+		</action>
+			<action name="updateproduct" class="updateProductAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+				<result name="success" type="redirect">
+				toproductdetail.action?productid=${product.id}
+			</result>
+			
+		</action>
+		<action name="adddeal" class="addDealAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<param name="vat">5</param>
+				<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			
+		</action>
+		<action name="addinvoice" class="addInvoiceAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<param name="vat">5</param>
+				<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			
+		</action>
+			<action name="customerlist" class="customerListAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/customer/customerlist.jsp
+			</result>
+		</action>
+			<action name="salepersonlist" class="salePersonListAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/saleperson/salepersonlist.jsp
+			</result>
+		</action>
+			<action name="productlist" class="productListAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/product/productlist.jsp
+			</result>
+		</action>
+		<action name="toproductdetail" class="toProductDetailAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/product/productdetail.jsp
+			</result>
+		</action>
+		<action name="deallist" class="dealListAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+		<param name="pageSize">3</param>
+			<result name="success">
+				/ghl/deal/deallist.jsp
+			</result>
+		</action>
+			<action name="toaddcustomer" class="toAddCustomerAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/customer/addcustomer.jsp
+			</result>
+		</action>
+			<action name="tocustomerdetail" class="toCustomerDetailAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+				<result name="success">
+				/ghl/customer/customerdetail.jsp
+			</result>
+			</action>
+		
+			
+			<action name="toadddeal" class="toAddDealAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/deal/adddeal.jsp
+			</result>
+		</action>
+			<action name="toaddproduct" class="toAddProductAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/product/addproduct.jsp
+			</result>
+		</action>
+			<action name="toaddsaleperson" class="toAddSalePersonAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/saleperson/addsaleperson.jsp
+			</result>
+		</action>
+			<action name="toaddinvoice" class="toAddInvoiceAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/deal/addinvoice.jsp
+			</result>
+		</action>
+		
+			<action name="toprintinvoice" class="toPrintInvoiceAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/deal/printinvoice.jsp
+			</result>
+		</action>
+		<action name="toadduser">
+			<result name="success">
+				/ghl/user/adduser.jsp
+			</result>
+		</action>
+			<action name="findcustomer" class="findCustomerAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+				
+			
+			<result name="success" type="json">
+			<param name="root">dealList</param>
+			</result>
+		</action>
+			<action name="findsaleperson" class="findSalePersonAction">
+						<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			
+			<result name="success" type="json">
+			<param name="root">salePersonList</param>
+			</result>
+		</action>
+		<action name="dealproductlist" class="dealProductListAction">
+						<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			
+			<result name="success" type="json">
+			<param name="root">productList</param>
+			</result>
+		</action>
+			<action name="dealdetail" class="dealDetailAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/deal/dealdetail.jsp
+			</result>
+			
+		</action>
+		<action name="findproductbyid" class="findProductByIdAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="json">
+			<param name="root">product</param>
+			</result>
+		</action>
+		<action name="deletedeal" class="deleteDealAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			
+		</action>
+	<action name="deleteproduct" class="deleteProductAction">
+			<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				productlist.action
+			</result>
+			
+		</action>
+			<action name="deletecustomer" class="deleteCustomerAction">
+					<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				customerlist.action
+			</result>
+			
+		</action>
+				<action name="deletesaleperson" class="deleteSalePersonAction">
+						<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success" type="redirectAction">
+				salepersonlist.action
+			</result>
+			
+		</action>
+		
+		<action name="tologin">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+			/ghl/login.jsp
+			</result>
+		</action>
+	
+				<action name="login" class="loginAction">
+			<result name="success" type="redirectAction">
+				deallist.action
+			</result>
+			<result name="login">
+			/ghl/login.jsp
+			</result>
+		</action>
+		
+		<action name="logout" class="logOutAction">
+				<interceptor-ref name="defaultStack"/>
+		<interceptor-ref name="loginInterceptor"/>
+			<result name="success">
+				/ghl/login.jsp
+			</result>
+			
+		</action>
+	</package>
+</struts> 
